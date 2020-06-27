@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Cubing Companion Admin</string>
+
+    <string-array name="result_calc_methods">
+        <item>Average</item>
+        <item>Mean</item>
+        <item>Single</item>
+    </string-array>
+</resources>

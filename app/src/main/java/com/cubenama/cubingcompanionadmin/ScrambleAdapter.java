@@ -1,45 +1,20 @@
 package com.cubenama.cubingcompanionadmin;
 
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.text.format.DateFormat;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ScrambleAdapter extends RecyclerView.Adapter<ScrambleAdapter.MyViewHolder>{
 
-    private ScheduleActivity.ClickListener clickListener;
+    private EventDetailsActivity.ClickListener clickListener;
     private List<String> scrambleList;
 
     @NonNull
@@ -72,9 +47,9 @@ public class ScrambleAdapter extends RecyclerView.Adapter<ScrambleAdapter.MyView
 
         EditText scrambleEditText;
 
-        private WeakReference<ScheduleActivity.ClickListener> listenerRef;
+        private WeakReference<EventDetailsActivity.ClickListener> listenerRef;
 
-        MyViewHolder(@NonNull View itemView, ScheduleActivity.ClickListener listener) {
+        MyViewHolder(@NonNull View itemView, EventDetailsActivity.ClickListener listener) {
             super(itemView);
             listenerRef = new WeakReference<>(listener);
             scrambleEditText = itemView.findViewById(R.id.scrambleEditText);
@@ -85,7 +60,7 @@ public class ScrambleAdapter extends RecyclerView.Adapter<ScrambleAdapter.MyView
         }
     }
 
-    ScrambleAdapter(List<String> scrambleList, ScheduleActivity.ClickListener clickListener){
+    ScrambleAdapter(List<String> scrambleList, EventDetailsActivity.ClickListener clickListener){
         this.scrambleList = scrambleList;
         this.clickListener = clickListener;
     }

@@ -1,5 +1,6 @@
 package com.cubenama.cubingcompanionadmin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CompAdapter extends RecyclerView.Adapter<CompAdapter.MyViewHolder>{
 
     private List<Comp> compList;
-    private CompsListActivity.ClickListener clickListener;
+    private CompetitionsActivity.ClickListener clickListener;
     private Context context;
 
 
@@ -39,11 +40,7 @@ public class CompAdapter extends RecyclerView.Adapter<CompAdapter.MyViewHolder>{
 
         // Assign values to list row
         holder.compName.setText(comp.name);
-        holder.compName.setOnClickListener(v->{
-            Intent manageCompIntent = new Intent(context, ManageCompActivity.class);
-            manageCompIntent.putExtra("id", comp.id);
-            context.startActivity(manageCompIntent);
-        });
+        holder.compName.setOnClickListener(v-> ((CompetitionsActivity)context).showCompDetailsDialog(comp));
     }
 
 
@@ -59,9 +56,9 @@ public class CompAdapter extends RecyclerView.Adapter<CompAdapter.MyViewHolder>{
 
         TextView compName;
 
-        private WeakReference<CompsListActivity.ClickListener> listenerRef;
+        private WeakReference<CompetitionsActivity.ClickListener> listenerRef;
 
-        MyViewHolder(@NonNull View itemView, CompsListActivity.ClickListener listener) {
+        MyViewHolder(@NonNull View itemView, CompetitionsActivity.ClickListener listener) {
             super(itemView);
             listenerRef = new WeakReference<>(listener);
             compName = itemView.findViewById(R.id.compName);
@@ -72,7 +69,7 @@ public class CompAdapter extends RecyclerView.Adapter<CompAdapter.MyViewHolder>{
         }
     }
 
-    CompAdapter(List<Comp> compList, CompsListActivity.ClickListener clickListener){
+    CompAdapter(List<Comp> compList, CompetitionsActivity.ClickListener clickListener){
         this.compList = compList;
         this.clickListener = clickListener;
     }

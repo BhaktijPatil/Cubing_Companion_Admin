@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ScheduleActivity"></activity>
-        <activity android:name=".ManageCompActivity" />
-        <activity android:name=".CompsListActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".EventDetailsActivity"/>
+        <activity android:name=".CompetitionsActivity" />
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

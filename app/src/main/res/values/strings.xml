@@ -1,6 +1,47 @@
 <resources>
     <string name="app_name">Cubing Companion Admin</string>
 
+    <string name="penalty_unusable_warning">Finish the solve to add a penalty.</string>
+    <string name="date_time_placeholder">DD-MMM-YYYY HH:MM</string>
+
+    <!-- Firebase field names -->
+    <string name="db_field_name_events">events</string>
+    <string name="db_field_name_comp_details">competition_details</string>
+    <string name="db_field_name_rounds">rounds</string>
+    <string name="db_field_name_results">results</string>
+    <string name="db_field_name_result_calc_method">result_calc_method</string>
+    <string name="db_field_name_solve_count">solve_count</string>
+    <string name="db_field_name_start_time">start_time</string>
+    <string name="db_field_name_end_time">end_time</string>
+    <string name="db_field_name_name">name</string>
+    <string name="db_field_name_qualification_criteria">qualification_criteria</string>
+    <string name="db_field_name_final_result">final_result</string>
+    <string name="db_field_name_time_list">time_list</string>
+    <string name="db_field_name_user_details">user_details</string>
+    <string name="db_field_name_wca_id">wca_id</string>
+    <string name="db_field_name_single">single</string>
+    <string name="db_field_name_photo_url">photo_url</string>
+    <string name="db_field_name_mobile">mobile</string>
+    <string name="db_field_name_email">email</string>
+    <string name="db_field_name_dob">dob</string>
+    <string name="db_field_name_profile_pictures">profile_pictures</string>
+    <string name="db_field_name_main_event">main_event</string>
+    <string name="db_field_name_organizer">organizer</string>
+    <string name="db_field_name_reg_start_time">registration_start_time</string>
+    <string name="db_field_name_reg_end_time">registration_end_time</string>
+    <string name="db_field_name_competitor_limit">competitor_limit</string>
+    <string name="db_field_value_competitors">competitors</string>
+    <string name="db_field_name_results_verified">results_verified</string>
+    <string name="db_field_name_app_details">app_details</string>
+    <string name="db_field_name_app_version">app_version</string>
+    <string name="db_field_name_min_version_id">min_version_id</string>
+    <string name="db_field_name_admin_min_version_id">admin_min_version_id</string>
+    <string name="db_field_name_scrambles">scrambles</string>
+    <string name="db_field_name_organizer_details">organizer_details</string>
+    <string name="db_field_name_key">key</string>
+    <string name="db_field_name_access">access</string>
+    <string name="db_field_name_id">id</string>
+
     <string-array name="result_calc_methods">
         <item>Average</item>
         <item>Mean</item>

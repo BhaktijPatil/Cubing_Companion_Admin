@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bgCompManager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:tint="#A6748A9C"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/background_19" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/darkTint"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/compManagerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/abel"
+                    android:text="Comp Manager"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/deleteCompButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:scaleType="fitCenter"
+                    android:tint="#EF5350"
+                    app:layout_constraintBottom_toBottomOf="@+id/compManagerTitle"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/compManagerTitle"
+                    app:srcCompat="@drawable/delete_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/darkTint"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/regEndTimeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/regEndTime"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="@+id/competitorLimit"
+                    app:layout_constraintTop_toTopOf="@+id/regEndTimeTitle"
+                    app:srcCompat="@drawable/calender_icon_color" />
+
+                <TextView
+                    android:id="@+id/regEndTimeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="Registration end time :"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/regStartTime" />
+
+                <TextView
+                    android:id="@+id/regEndTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="@string/date_time_placeholder"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/regEndTimeTitle" />
+
+                <TextView
+                    android:id="@+id/regStartTimeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="Registration start time :"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/compEndTime" />
+
+                <TextView
+                    android:id="@+id/regStartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="@string/date_time_placeholder"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/regStartTimeTitle" />
+
+                <ImageView
+                    android:id="@+id/regStartTimeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/regStartTime"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="@+id/competitorLimit"
+                    app:layout_constraintTop_toTopOf="@+id/regStartTimeTitle"
+                    app:srcCompat="@drawable/calender_icon_color" />
+
+                <TextView
+                    android:id="@+id/compEndTimeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="Competition end time :"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/compStartTime" />
+
+                <TextView
+                    android:id="@+id/compEndTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="@string/date_time_placeholder"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/compEndTimeTitle" />
+
+                <ImageView
+                    android:id="@+id/compEndTimeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/compEndTime"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="@+id/competitorLimit"
+                    app:layout_constraintTop_toTopOf="@+id/compEndTimeTitle"
+                    app:srcCompat="@drawable/calender_icon_color" />
+
+                <ImageView
+                    android:id="@+id/compNameIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/compName"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/compName"
+                    app:srcCompat="@drawable/information_icon_white" />
+
+                <ImageView
+                    android:id="@+id/competitorLimitIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/competitorLimit"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="@+id/compNameIcon"
+                    app:layout_constraintStart_toStartOf="@+id/compNameIcon"
+                    app:layout_constraintTop_toTopOf="@+id/competitorLimit"
+                    app:srcCompat="@drawable/competitors_icon_white" />
+
+                <EditText
+                    android:id="@+id/compName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/abel"
+                    android:hint="Competition Name"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/compNameIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/competitorLimit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:fontFamily="@font/abel"
+                    android:hint="Competitor limit"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="@+id/compName"
+                    app:layout_constraintStart_toStartOf="@+id/compName"
+                    app:layout_constraintTop_toBottomOf="@+id/compName" />
+
+                <TextView
+                    android:id="@+id/compStartTimeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="Competition start time :"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/competitorLimit" />
+
+                <TextView
+                    android:id="@+id/compStartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/abel"
+                    android:text="@string/date_time_placeholder"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/compStartTimeButton"
+                    app:layout_constraintStart_toStartOf="@+id/competitorLimitIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/compStartTimeTitle" />
+
+                <ImageView
+                    android:id="@+id/compStartTimeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/compStartTime"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="@+id/competitorLimit"
+                    app:layout_constraintTop_toTopOf="@+id/compStartTimeTitle"
+                    app:srcCompat="@drawable/calender_icon_color" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/darkTint"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/updateButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:fontFamily="@font/abel"
+                            android:text="Update"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/resultsButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:fontFamily="@font/abel"
+                            android:text="Results"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <Button
+                            android:id="@+id/scheduleButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorAccent"
+                            android:fontFamily="@font/abel"
+                            android:text="Schedule"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -6,15 +6,15 @@ class EventRound {
 
     String roundId;
     long roundNo;
-    long participantCount;
+    long qualificationCriteria;
     Timestamp startTimestamp;
     Timestamp endTimestamp;
 
-    EventRound(String roundId, long roundNo, long participantCount, Timestamp startTimestamp, Timestamp endTimestamp)
+    EventRound(String roundId, long roundNo, long qualificationCriteria, Timestamp startTimestamp, Timestamp endTimestamp)
     {
         this.roundId = roundId;
         this.roundNo = roundNo;
-        this.participantCount = participantCount;
+        this.qualificationCriteria = qualificationCriteria;
         this.startTimestamp = startTimestamp;
         this.endTimestamp= endTimestamp;
     }

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.squareup.okhttp.Cache;
-
 public class MenuActivity extends AppCompatActivity {
 
     @Override

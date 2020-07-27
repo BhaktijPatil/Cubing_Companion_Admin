@@ -136,6 +136,13 @@ public class CompetitionsActivity extends AppCompatActivity {
                 eventDetailsIntent.putExtra("comp_id", competition.id);
                 startActivity(eventDetailsIntent);
             });
+
+            resultsButton.setOnClickListener(v -> {
+                editCompDialog.dismiss();
+                Intent resultEventsIntent = new Intent(this, ResultEventsActivity.class);
+                resultEventsIntent.putExtra("comp_id", competition.id);
+                startActivity(resultEventsIntent);
+            });
         }
         else
         {

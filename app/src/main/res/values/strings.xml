@@ -41,6 +41,7 @@
     <string name="db_field_name_key">key</string>
     <string name="db_field_name_access">access</string>
     <string name="db_field_name_id">id</string>
+    <string name="db_field_name_is_verified">is_verified</string>
 
     <string-array name="result_calc_methods">
         <item>Average</item>

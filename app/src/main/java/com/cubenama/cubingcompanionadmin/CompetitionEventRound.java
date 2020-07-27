@@ -6,7 +6,7 @@ class CompetitionEventRound {
 
     String roundId;
     long roundNo;
-    private String eventName;
+    String eventName;
     long qualificationCriteria;
     Timestamp startTime;
     Timestamp endTime;

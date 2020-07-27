@@ -99,9 +99,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                     }
                     eventList.add(competitionEvent);
                     competitionEventAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 });
             }
-            progressBar.setVisibility(View.GONE);
         });
     }
 

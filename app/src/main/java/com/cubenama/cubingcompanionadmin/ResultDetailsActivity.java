@@ -5,9 +5,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,8 +21,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 public class ResultDetailsActivity extends AppCompatActivity {
 
@@ -107,6 +113,83 @@ public class ResultDetailsActivity extends AppCompatActivity {
             noResultsTextView.setVisibility(View.GONE);
             oopsImageView.setVisibility(View.GONE);
         });
+    }
+
+
+
+    // Function to DNF the solve
+    void dnfSolve(TextView textView, ImageView dnfImageView)
+    {
+        // Set listener to undo DNF
+        String prevTime = textView.getText().toString();
+        textView.setText("DNF");
+        dnfImageView.setOnClickListener(v-> undoDNF(textView, dnfImageView, prevTime));
+    }
+
+
+
+    // Function to undo DNF
+    void undoDNF(TextView textView, ImageView dnfImageView, String prevTime)
+    {
+        // Restore previous time
+        textView.setText(prevTime);
+        // Listener to Redo DNF
+        dnfImageView.setOnClickListener(v-> dnfSolve(textView, dnfImageView));
+    }
+
+
+
+    // Function to set solve time in textview
+    void setTime(long time, TextView textView)
+    {
+        if(time == ResultCodes.DNF_CODE)
+            textView.setText("DNF");
+        else if(time == ResultCodes.DNS_CODE)
+            textView.setText("DNS");
+        else {
+            DateFormat dateFormat = new SimpleDateFormat("mm:ss.SS");
+            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            textView.setText(dateFormat.format(time));
+        }
+    }
+
+
+
+    // Show dialog to edit time
+    void showEditTimeDialog(TextView textView)
+    {
+        final Dialog editTimeDialog = new Dialog(this);
+        editTimeDialog.setContentView(R.layout.dialog_time_picker);
+        editTimeDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        Button cancelButton = editTimeDialog.findViewById(R.id.cancelButton);
+        Button updateButton = editTimeDialog.findViewById(R.id.updateButton);
+
+        EditText minutesEditText = editTimeDialog.findViewById(R.id.minutesEditText);
+        EditText secondsEditText = editTimeDialog.findViewById(R.id.secondsEditText);
+        EditText milliSecondsEditText = editTimeDialog.findViewById(R.id.milliSecondsEditText);
+
+        cancelButton.setOnClickListener(view -> editTimeDialog.dismiss());
+        updateButton.setOnClickListener(view -> {
+            String minutes = minutesEditText.getText().toString();
+            String seconds = secondsEditText.getText().toString();
+            String millis = milliSecondsEditText.getText().toString();
+
+            // Check time validity
+            if(minutes.length() != 2 || seconds.length() != 2 || millis.length() != 2)
+                Toast.makeText(this, "Time should be in the format MM:SS.mm .", Toast.LENGTH_SHORT).show();
+            else if(Long.parseLong(millis) > 99 && Long.parseLong(millis) < 0)
+                Toast.makeText(this, "Invalid milli seconds value.", Toast.LENGTH_SHORT).show();
+            else if(Long.parseLong(seconds) > 59 && Long.parseLong(seconds) < 0)
+                Toast.makeText(this, "Invalid seconds value.", Toast.LENGTH_SHORT).show();
+            else if(Long.parseLong(minutes) > 59 && Long.parseLong(minutes) < 0)
+                Toast.makeText(this, "Invalid minutes value.", Toast.LENGTH_SHORT).show();
+            else {
+                textView.setText(minutes + ":" + seconds + "." + millis);
+                editTimeDialog.dismiss();
+            }
+        });
+        editTimeDialog.show();
     }
 
 

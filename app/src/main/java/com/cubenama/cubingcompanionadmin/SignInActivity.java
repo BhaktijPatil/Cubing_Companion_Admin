@@ -27,7 +27,7 @@ public class SignInActivity extends AppCompatActivity {
     private SharedPreferences userAccessSharedPreferences;
 
     // Current app version
-    private static final long VERSION_ID = 2;
+    private static final long VERSION_ID = 3;
 
     private ProgressBar progressBar;
     private EditText adminKeyEditText;

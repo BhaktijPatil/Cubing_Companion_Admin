@@ -4,25 +4,28 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.firestore.CollectionReference;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class RoundResultAdapter extends RecyclerView.Adapter<RoundResultAdapter.MyViewHolder>{
@@ -70,48 +73,79 @@ public class RoundResultAdapter extends RecyclerView.Adapter<RoundResultAdapter.
                 // Refresh activity
                 ((ResultDetailsActivity) context).finish();
                 ((ResultDetailsActivity) context).overridePendingTransition(0, 0);
-                ((ResultDetailsActivity) context).startActivity(((ResultDetailsActivity) context).getIntent());
+                context.startActivity(((ResultDetailsActivity) context).getIntent());
                 ((ResultDetailsActivity) context).overridePendingTransition(0, 0);
             });
         });
 
         // Show dialog with result details
         holder.resultDetailsLayout.setOnClickListener(v-> {
-//            final Dialog resultDetailsDialog = new Dialog(context, R.style.Theme_AppCompat_NoActionBar);
-//            resultDetailsDialog.setContentView(R.layout.dialog_box_result_details);
-//            Window window = resultDetailsDialog.getWindow();
-//            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            window.setGravity(Gravity.CENTER);
-//            window.setBackgroundDrawableResource(android.R.color.transparent);
-//
-//            TextView nameTextView = resultDetailsDialog.findViewById(R.id.nameTextView);
-//            TextView wcaIdTextView = resultDetailsDialog.findViewById(R.id.wcaIdTextView);
-//            TextView timeListTextView = resultDetailsDialog.findViewById(R.id.timeListTextView);
-//            TextView singleTextView = resultDetailsDialog.findViewById(R.id.singleTextView);
-//            TextView finalResultTextView = resultDetailsDialog.findViewById(R.id.finalResultTextView);
-//
-//            ImageView verifiedImageView = resultDetailsDialog.findViewById(R.id.verifiedImageView);
-//
-//            // Show tick if results are verified
-//            if(result.isVerified)
-//                verifiedImageView.setVisibility(View.VISIBLE);
-//            else
-//                verifiedImageView.setVisibility(View.GONE);
-//
-//            wcaIdTextView.setText(result.wcaId);
-//            nameTextView.setText(result.name);
-//            singleTextView.setText("Single : " + formatTime(result.single));
-//            finalResultTextView.setText(((Activity)context).getIntent().getStringExtra("result_calc_method") + " : " + formatTime(result.result));
-//
-//            String times = "";
-//            for(long time : result.timeList)
-//            {
-//                times += formatTime(time) + ",  ";
-//            }
-//
-//            timeListTextView.setText(times.substring(0, times.length() - 3));
-//            resultDetailsDialog.show();
+            final Dialog manageResultsDialog = new Dialog(context);
+            manageResultsDialog.setContentView(R.layout.dialog_manage_result);
+            manageResultsDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+            // Setup recycler views and adapters
+            RecyclerView timeListRecyclerView = manageResultsDialog.findViewById(R.id.timeListRecyclerView);
+
+            ManageSolveAdapter manageSolveAdapter = new ManageSolveAdapter(context, result.timeList, pos -> Toast.makeText(context, String.valueOf(result.timeList.get(position)), Toast.LENGTH_SHORT).show());
+            RecyclerView.LayoutManager manageSolveLayoutManager = new LinearLayoutManager(context);
+
+            timeListRecyclerView.setLayoutManager(manageSolveLayoutManager);
+            timeListRecyclerView.setAdapter(manageSolveAdapter);
+            manageSolveAdapter.notifyDataSetChanged();
+
+            TextView finalResultTextView = manageResultsDialog.findViewById(R.id.finalResultTextView);
+            ((ResultDetailsActivity)context).setTime(result.result, finalResultTextView);
+            TextView competitorNameTextView = manageResultsDialog.findViewById(R.id.competitorNameTextView);
+            competitorNameTextView.setText(result.name + "'s Result :");
+
+            ImageView dnfImageView = manageResultsDialog.findViewById(R.id.dnfImageView);
+            dnfImageView.setOnClickListener(view -> ((ResultDetailsActivity)context).dnfSolve(finalResultTextView, dnfImageView));
+
+            ImageView setResultImageView = manageResultsDialog.findViewById(R.id.setResultImageView);
+            setResultImageView.setOnClickListener(view -> ((ResultDetailsActivity)context).showEditTimeDialog(finalResultTextView));
+            
+            Button updateButton = manageResultsDialog.findViewById(R.id.updateButton);
+            updateButton.setOnClickListener(view -> {
+                ArrayList<Long> tempList = new ArrayList<>();
+                // Retrieve times from recycler view
+                for (int i = 0; i < result.timeList.size(); i++)
+                    tempList.add(convertTime(((TextView) timeListRecyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.solveTimeTextView)).getText().toString()));
+
+                Map<String, Object> resultDetails = new HashMap<>();
+                resultDetails.put(context.getString(R.string.db_field_name_time_list), tempList);
+                resultDetails.put(context.getString(R.string.db_field_name_final_result), convertTime(finalResultTextView.getText().toString()));
+                
+                // Update new times to DB
+                ((ResultDetailsActivity)context).resultDetailsReference.document(result.id).update(resultDetails).addOnCompleteListener(updateResultsTask -> {
+                    manageResultsDialog.dismiss();
+                    // Refresh activity
+                    ((ResultDetailsActivity) context).finish();
+                    ((ResultDetailsActivity) context).overridePendingTransition(0, 0);
+                    context.startActivity(((ResultDetailsActivity) context).getIntent());
+                    ((ResultDetailsActivity) context).overridePendingTransition(0, 0);
+                });
+            });
+
+            manageResultsDialog.show();
         });
+    }
+
+
+
+    // Function to convert mm:ss.SS to milliseconds
+    private long convertTime(String solveTime)
+    {
+        if(solveTime.equals("DNF"))
+            return ResultCodes.DNF_CODE;
+        if(solveTime.equals("DNS"))
+            return ResultCodes.DNS_CODE;
+
+        long minutes = Long.parseLong(solveTime.substring(0,2));
+        long seconds = Long.parseLong(solveTime.substring(3,5));
+        long milliseconds = Long.parseLong(solveTime.substring(6,8)) * 10;
+        // Calculate solve time in milliseconds
+        return minutes * 60 * 1000 + seconds * 1000 + milliseconds;
     }
 
 
